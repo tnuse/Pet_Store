@@ -45,7 +45,7 @@ public class PetStore {
 	@JoinTable(name = "pet_store_customer", 
 	joinColumns = @JoinColumn(name = "pet_store_id"), 
 	inverseJoinColumns = @JoinColumn(name = "customer_id"))
-	Set<Customer> customers = new HashSet<>();
+	private Set<Customer> customers = new HashSet<>();
 
 	// annotation identifying this as a one-to-many relationship, mapping one store to many employees 
 	// using the @EqualsandHashCode and @ToString annotations to prevent recursion

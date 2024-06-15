@@ -1,0 +1,47 @@
+package pet.store.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
+
+import lombok.extern.slf4j.Slf4j;
+import pet.store.controller.model.PetStoreData;
+import pet.store.service.PetStoreService;
+
+@RestController
+@RequestMapping("/pet_store")
+@Slf4j
+public class PetStoreController {
+
+	
+	
+	
+	@Autowired
+	private PetStoreService petStoreService;
+	
+	 
+	// createPetStore method, using the @PostMapping to identify the method to be called to create or Post a store
+	// to the pet_store table and @ResponseStatus to set the HTTP code to respond with when successful
+	@PostMapping("/create_store")
+	@ResponseStatus(code = HttpStatus.CREATED)
+	public PetStoreData createPetStore (@RequestBody PetStoreData petStoreData) {
+		log.info("Creating pet store {}", petStoreData);
+		return petStoreService.savePetStore(petStoreData);
+	}
+	
+	// updatePetStore method, using the @PutMapping to identify the method to be called to update (Put) a store
+	@PutMapping("/update_store")
+	public PetStoreData updatePetStore(@PathVariable Long petStoreId, @RequestBody PetStoreData petStoreData) {
+		
+		petStoreData.setPetStoreId(petStoreId);
+		log.info("Updating Pet Store {}", petStoreData);
+		
+		return petStoreService.savePetStore(petStoreData);
+	}
+	}

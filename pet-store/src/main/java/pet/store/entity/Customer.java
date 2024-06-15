@@ -36,4 +36,5 @@ public class Customer {
 	@ToString.Exclude
 	@OneToMany(mappedBy = "customers", cascade = CascadeType.PERSIST)
 	private Set<PetStore> petStores = new HashSet<>();
-}
+
+	}
